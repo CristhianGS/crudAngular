@@ -1,0 +1,109 @@
+<nav class="navbar navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">
+    CRUD
+  </a>
+  <button type="button" class="btn btn-danger" (click)="modal.open(contenido)"> Crear Nuevo Donante </button>
+</nav>
+
+<!-- lista de Donantes -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 mt-4">
+      <ul class="list-group">
+        <li *ngFor="let donante of donanteArray" class="list-group-item list-group-item-action"
+          (click)="edit(donante)" [class.active]="donante == selectedDonante"
+          (click)="modal.open(formEdit)"
+          >
+          
+          <span class="bagde"> {{ donante.id }}</span> - {{ donante.name }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- Formulario para Crear un Nuevo Donante -->
+
+<ng-template #contenido let-modal>
+
+  <div class="modal-header">
+    <h4 class="modal-title">Registrar un Nuevo Donante</h4>
+    <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="form-group">
+      <input type="text" [(ngModel)]="selectedDonante.name" placeholder="Name" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <input type="text" [(ngModel)]="selectedDonante.cellphone" placeholder="Cellphone" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <input type="text" [(ngModel)]="selectedDonante.country" placeholder="Country" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <input type="text" [(ngModel)]="selectedDonante.address" placeholder="Address" class="form-control">
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="modal.close()">Cancelar</button>
+    <button (click)="add()" (click)="modal.close()" class="btn btn-primary">
+      Registrar
+    </button>
+  </div>
+
+</ng-template>
+
+
+
+
+
+
+
+<!-- Formulario para Editar un Nuevo Donante -->
+
+<ng-template #formEdit let-modal>
+
+  <div class="modal-header">
+    <h4 class="modal-title">Editar Donante</h4>
+    <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="form-group">
+      <input type="text" [(ngModel)]="selectedDonante.name" placeholder="Name" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <input type="text" [(ngModel)]="selectedDonante.cellphone" placeholder="Cellphone" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <input type="text" [(ngModel)]="selectedDonante.country" placeholder="Country" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <input type="text" [(ngModel)]="selectedDonante.address" placeholder="Address" class="form-control">
+    </div>
+  </div>
+
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="modal.close()">Cancelar</button>
+    <button (click)="edit()" (click)="modal.close()" class="btn btn-primary"> Editar </button>
+    <button (click)="delete()" (click)="modal.close()" class="btn btn-danger"
+    *ngIf="selectedDonante.id !== 0"
+    > Eliminar </button>
+  </div>
+
+</ng-template>
